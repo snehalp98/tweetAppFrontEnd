@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginService } from '../services/login/login-service.service';
-import { TweetServiceService } from '../services/tweets/tweet-service.service';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { LoginService } from "../services/login/login-service.service";
+import { TweetServiceService } from "../services/tweets/tweet-service.service";
 
 @Component({
-  selector: 'app-my-tweets',
-  templateUrl: './my-tweets.component.html',
-  styleUrls: ['./my-tweets.component.css'],
+  selector: "app-my-tweets",
+  templateUrl: "./my-tweets.component.html",
+  styleUrls: ["./my-tweets.component.css"],
 })
 export class MyTweetsComponent implements OnInit {
   othersTweets: any;
@@ -24,14 +24,14 @@ export class MyTweetsComponent implements OnInit {
 
   ngOnInit(): void {
     const loginId =
-      localStorage.getItem('loginId') == null
-        ? ''
-        : localStorage.getItem('loginId');
+      localStorage.getItem("loginId") == null
+        ? ""
+        : localStorage.getItem("loginId");
     if (loginId != null) {
       this.getTweetsByUserName(loginId);
     }
     this.tweetUpdate = this.fb.group({
-      tweetText: ['', [Validators.required]],
+      tweetText: ["", [Validators.required]],
     });
   }
 
@@ -44,9 +44,9 @@ export class MyTweetsComponent implements OnInit {
 
   likeTweet(tweetId: string) {
     const loginId =
-      localStorage.getItem('loginId') == null
-        ? ''
-        : localStorage.getItem('loginId');
+      localStorage.getItem("loginId") == null
+        ? ""
+        : localStorage.getItem("loginId");
 
     if (loginId != null) {
       this.tweetService.addLike(loginId, tweetId).subscribe(
@@ -61,10 +61,11 @@ export class MyTweetsComponent implements OnInit {
   }
 
   editTweet() {
+    this.onEditTweetModal(this.tweetId);
     const loginId =
-      localStorage.getItem('loginId') == null
-        ? ''
-        : localStorage.getItem('loginId');
+      localStorage.getItem("loginId") == null
+        ? ""
+        : localStorage.getItem("loginId");
 
     if (loginId != null) {
       const newUpdatedTweet = {
@@ -80,9 +81,9 @@ export class MyTweetsComponent implements OnInit {
 
   deleteTweet(tweetId: string) {
     const loginId =
-      localStorage.getItem('loginId') == null
-        ? ''
-        : localStorage.getItem('loginId');
+      localStorage.getItem("loginId") == null
+        ? ""
+        : localStorage.getItem("loginId");
 
     if (loginId != null) {
       this.tweetService.deleteTweet(loginId, tweetId).subscribe(
@@ -104,12 +105,12 @@ export class MyTweetsComponent implements OnInit {
     });
 
     this.tweetId = tempTweetId;
-    const container = document.getElementById('main-container');
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.style.display = 'none';
-    button.setAttribute('data-toggle', 'modal');
-    button.setAttribute('data-target', '#editTweetModal');
+    const container = document.getElementById("main-container");
+    const button = document.createElement("button");
+    button.type = "button";
+    button.style.display = "none";
+    button.setAttribute("data-toggle", "modal");
+    button.setAttribute("data-target", "#editTweetModal");
     container?.appendChild(button);
     button.click();
   }
