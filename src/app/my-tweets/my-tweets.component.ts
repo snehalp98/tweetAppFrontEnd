@@ -47,7 +47,6 @@ export class MyTweetsComponent implements OnInit {
       localStorage.getItem("loginId") == null
         ? ""
         : localStorage.getItem("loginId");
-
     if (loginId != null) {
       this.tweetService.addLike(loginId, tweetId).subscribe(
         (data) => {
@@ -61,7 +60,6 @@ export class MyTweetsComponent implements OnInit {
   }
 
   editTweet() {
-    //this.onEditTweetModal(this.tweetId);
     const loginId =
       localStorage.getItem("loginId") == null
         ? ""
@@ -99,9 +97,7 @@ export class MyTweetsComponent implements OnInit {
 
   public onEditTweetModal(tempTweetId: string): void {
     this.tweetService.showMyTweetsById(tempTweetId).subscribe((data: any) => {
-      console.log("in this.tweetService.showMyTweetsById");
       data.forEach((element: any) => {
-        console.log("in  data.forEach");
         this.updateTweetText = element.tweetText;
       });
     });
